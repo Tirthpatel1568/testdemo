@@ -1,0 +1,21 @@
+<div class="py-3 d-flex justify-content-between sub-tab mb-3">
+    <div class="col-7">
+        <h6 class="mx-2 my-0">Sub Dept. list & details</h6>
+    </div>
+    <div class="col-5">
+        <i class="fa fa-refresh d-flex flex-row-reverse mx-3 my-0" aria-hidden="true" (click)="refreshData()"></i>
+    </div>
+</div>
+<div *ngFor="let obj of subDepartmentList">
+    <ul>
+       <li> id:  {{obj?.id}}</li>
+       <li> division Name: {{obj?.division_name}}</li>
+       <li> department Id: {{obj?.department_id}}</li>
+       <li> Parent Id: {{obj?.parent}}</li>
+    </ul>
+</div>
+<!-- *appPermission="'division_write'" -->
+<button  pRipple type="button"  class="btn fab-button add-sticky"
+    (click)="manageSubDepartmentForm()">
+    <i class="fa fa-plus"></i>
+</button>

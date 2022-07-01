@@ -1,0 +1,38 @@
+<form action="" *ngIf="isLoadForm" [formGroup]="subDepartmentForm" role="form">
+
+    <!-- Title -->
+    <div class="my-2">
+        <label for="title" class="form-label">Sub department Name <small class="p-error">*</small></label>
+        <input type="text" class="form-control" formControlName="division_name" placeholder="Enter Title " value="title">
+        <small class="p-error" *ngIf="subDepartmentForm.controls['division_name'].touched &&
+                (subDepartmentForm.controls['division_name'].errors?.required)">
+            The title is required.
+        </small>
+        <small class="p-error" *ngIf="subDepartmentForm.controls['division_name'].touched &&
+                (subDepartmentForm.controls['division_name'].errors?.pattern)">
+            The title should be alphabet.
+        </small>
+    </div>
+
+    <!-- Skills -->
+    <div class="my-3">
+        <label for="parent" class="form-label">Parent Sub-Department </label>
+        <ng-select placeholder="Select Option" [clearable]="true" bindLabel="Sub-Department" [multiple]="false"
+            formControlName="parent" [clearable]="true">
+            <ng-option [value]=0 disabled>-- Select Option --</ng-option>
+            <ng-option
+                *ngFor="let opObj of alldepartmentAndSubdepartmnetList; let opI = index;"
+                [value]="opObj.id">
+                <span *ngIf="opObj?.parent > 0">--
+                </span>
+                
+                {{opI+1}}. {{opObj?.division_name}}
+            </ng-option>
+        </ng-select>
+    </div>
+    <!-- Submit -->
+    <div class="mt-4" >
+        <div class="text-center">
+        <button class="btn btn-primary btn-rounded" [disabled]="!subDepartmentForm.valid"
+            (click)="submitForm()">Submit</button>
+    </div>
